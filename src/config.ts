@@ -23,7 +23,7 @@ export const OWNER_CONFIG = {
 // 文档路径
 export const DOCUMENT_CONFIG = {
     root: 'idea-document',
-    pageSize: 30,
+    pageSize: 10,
 }
 
 // 外链

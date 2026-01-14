@@ -7,6 +7,7 @@ import { categories as getGategories } from "@/utils/document";
 export default async function Home() {
     const categories = await getGategories();
     const articles = categories.flatMap(category => category.articles).sort((x, y) => y.state.createdTime.getTime() - x.state.createdTime.getTime());
+    const last = Math.ceil(articles.length / DOCUMENT_CONFIG.pageSize);
 
     return (
         <Frame categories={categories} articles={articles.slice(0,30)}>
@@ -19,7 +20,7 @@ export default async function Home() {
             }
             <div className="bg-white dark:bg-[#0D1117] rounded-md shadow-md p-2 flex justify-between">
                 <span></span>
-                <Link href="/page/2">下一页</Link>
+                {last > 1 ? <Link href="/page/2">下一页</Link> : <span></span>}
             </div>
         </Frame>
     );

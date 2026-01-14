@@ -32,6 +32,7 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
     const categories = await getGategories();
     const category = categories.find((item) => item.name === decodeURIComponent(path.category));
     const articles = categories.flatMap(category => category.articles).sort((x, y) => y.state.createdTime.getTime() - x.state.createdTime.getTime());
+    const last = Math.ceil((category?.articles.length??0) / DOCUMENT_CONFIG.pageSize);
 
     return (
         <Frame categories={categories} articles={articles.slice(0, 30)}>
@@ -44,7 +45,7 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
             }
             <div className="bg-white dark:bg-[#0D1117] rounded-md shadow-md p-2 flex justify-between">
                 <span></span>
-                <Link href={`/${path.category}/page/2`}>下一页</Link>
+                {last > 1 ? <Link href={`/${path.category}/page/2`}>下一页</Link> : <span></span>}
             </div>
         </Frame>
     )
