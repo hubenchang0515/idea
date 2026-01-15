@@ -18,10 +18,14 @@ export default async function Home() {
                     )
                 })
             }
-            <div className="bg-white dark:bg-[#0D1117] rounded-md shadow-md p-2 flex justify-between">
-                <span></span>
-                {last > 1 ? <Link href="/page/2">下一页</Link> : <span></span>}
-            </div>
+            {
+                last > 1 &&
+                <div className="bg-white dark:bg-[#0D1117] rounded-md shadow-md p-2 flex justify-between">
+                    <span></span>
+                    <Link href="/page/2" className="px-1 hover:bg-pink-100 dark:hover:bg-emerald-500">下一页</Link>
+                </div>
+            }
+            
         </Frame>
     );
 }

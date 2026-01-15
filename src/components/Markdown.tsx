@@ -4,6 +4,7 @@ import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import "github-markdown-css"
+import Link from './Link';
 
 export interface MarkdownProps {
     content:string;
@@ -22,6 +23,10 @@ export default function Markdown(props: MarkdownProps) {
 
                     pre({children}) {
                         return <div>{children}</div>
+                    },
+
+                    a({href, title, children}) {
+                        return <Link href={href} title={title} children={children}/>
                     },
 
                     code({className, children}) {

@@ -27,8 +27,8 @@ export default function Frame(props:FrameProps)
                             {
                                 LINKS.map((item, i) => {
                                     return (
-                                        <Link key={i} href={item.url} className="hover:bg-indigo-200 dark:hover:bg-emerald-500">
-                                            <img src={item.icon} className="p-1" title={item.title}/>
+                                        <Link key={i} href={item.url} title={item.title} className="hover:bg-pink-100 dark:hover:bg-emerald-500">
+                                            <img src={item.icon} className="p-1" />
                                         </Link>
                                     )
                                 })
@@ -40,8 +40,8 @@ export default function Frame(props:FrameProps)
                                 {
                                     props.categories?.map((item, i) => {
                                         return (
-                                            <Link key={i} className='truncate px-1 hover:bg-indigo-200 dark:hover:bg-emerald-500 flex justify-between' href={`/${item.name}`}>
-                                                <span>{item.name}</span>
+                                            <Link key={i} className='px-1 hover:bg-pink-100 dark:hover:bg-emerald-500 flex justify-between' href={`/${encodeURIComponent(item.name)}`} title={item.name}>
+                                                <span className="truncate">{item.name}</span>
                                                 <span>{item.articles.length}</span>
                                             </Link>
                                         )
@@ -62,7 +62,7 @@ export default function Frame(props:FrameProps)
                             {
                                 props.articles?.map((item, i) => {
                                     return (
-                                        <Link key={i} className='truncate px-1 hover:bg-indigo-200 dark:hover:bg-emerald-500' href={`/${item.category}/${item.name}`}>{item.name.replace(/\.md$/, '')}</Link>
+                                        <Link key={i} title={item.name.replace(/\.md$/, '')} className='truncate px-1 hover:bg-pink-100 dark:hover:bg-emerald-500' href={`/${encodeURIComponent(item.category)}/${encodeURIComponent(item.name)}`}>{item.name.replace(/\.md$/, '')}</Link>
                                     )
                                 })
                             }

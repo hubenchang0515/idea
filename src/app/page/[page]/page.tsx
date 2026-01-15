@@ -38,10 +38,14 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
                     )
                 })
             }
-            <div className="bg-white dark:bg-[#0D1117] rounded-md shadow-md p-2 flex justify-between">
-                { page > 1 ? <Link href={`/page/${page-1}`}>上一页</Link> : <span/> }
-                { page < last ? <Link href={`/page/${page+1}`}>下一页</Link> : <span/> }
-            </div>
+            {
+                (page > 1 || page < last) &&
+                <div className="bg-white dark:bg-[#0D1117] rounded-md shadow-md p-2 flex justify-between">
+                    { page > 1 ? <Link href={`/page/${page-1}`} className="px-1 hover:bg-pink-100 dark:hover:bg-emerald-500">上一页</Link> : <span/> }
+                    { page < last ? <Link href={`/page/${page+1}`} className="px-1 hover:bg-pink-100 dark:hover:bg-emerald-500">下一页</Link> : <span/> }
+                </div>
+            }
+            
         </Frame>
     );
 }

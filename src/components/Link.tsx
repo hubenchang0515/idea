@@ -6,7 +6,8 @@ import React from "react";
 
 export interface LinkProps {
     className?: string;
-    href: string;
+    href?: string;
+    title?: string;
     children?: React.ReactNode;
 }
 
@@ -17,10 +18,10 @@ export default function Link(props:LinkProps) {
     }
 
     if (props.href.toString().startsWith("http") && !props.href.toString().startsWith(SITE_CONFIG.origin + SITE_CONFIG.basePath)) {
-        return <NextLink target="_blank" rel="noopener" {...props}/>
+        return <NextLink target="_blank" rel="noopener" href={props.href} {...props}/>
     }
     
     return (
-        <NextLink {...props}/>
+        <NextLink href={props.href} {...props}/>
     )
 }
