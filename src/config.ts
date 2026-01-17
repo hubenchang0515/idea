@@ -1,6 +1,6 @@
 // 站点信息
 export const SITE_CONFIG = {
-    origin: 'https://idea.xplanc.org',
+    origin: 'https://xplanc.org',
     basePath: '/idea',
     title: '想法',
     brand: '想法',
