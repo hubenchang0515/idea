@@ -1,13 +1,11 @@
-import { title } from "process"
-
 // 站点信息
 export const SITE_CONFIG = {
     origin: 'https://idea.xplanc.org',
     basePath: '/idea',
-    title: '脑洞',
-    brand: '脑洞',
+    title: '想法',
+    brand: '想法',
     repo: 'https://github.com/hubenchang0515/idea',
-    description: "记录.",
+    description: '像云又像风'
 }
 
 // 站长信息
