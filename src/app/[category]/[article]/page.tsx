@@ -1,3 +1,4 @@
+import Card from "@/components/Card";
 import Discussion from "@/components/Discussion";
 import Frame from "@/components/Frame";
 import Markdown from "@/components/Markdown";
@@ -38,9 +39,9 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
 
     return (
         <Frame categories={categories} articles={articles.slice(0,30)}>
-            <div className='bg-white dark:bg-[#0D1117] rounded-md shadow-md p-2'>
+            <Card>
                 <Markdown content={text}/>
-            </div>
+            </Card>
             <Discussion/>
         </Frame>
     )

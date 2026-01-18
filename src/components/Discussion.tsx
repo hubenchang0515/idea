@@ -1,9 +1,10 @@
 "use client";
 import Giscus from '@giscus/react';
+import Card from './Card';
 
 export default function Discussion() {
     return (
-        <div className='bg-white dark:bg-[#0D1117] rounded-md shadow-md p-2'>
+        <Card>
             <Giscus
                 id="comments"
                 repo="hubenchang0515/comments"
@@ -19,6 +20,6 @@ export default function Discussion() {
                 lang='zh-CN'
                 loading="lazy"
             />
-        </div>
+        </Card>
     );
 }

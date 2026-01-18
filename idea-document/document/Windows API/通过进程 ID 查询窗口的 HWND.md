@@ -4,25 +4,20 @@
 
 通常的做法是**枚举系统中的所有顶级窗口**，并检查每个窗口所属的进程 ID 是否与目标 PID 匹配。
 
----
-
-### 核心实现逻辑
+## 核心实现逻辑
 
 最标准且高效的方法是使用 `EnumWindows` 函数。
 
 1. **定义一个结构体**：用于在回调函数中存储目标 PID 和返回的 HWND。
-2. **调用 `EnumWindows**`：该函数会遍历屏幕上的所有顶级窗口。
+2. **调用 `EnumWindows`**：该函数会遍历屏幕上的所有顶级窗口。
 3. **编写回调函数**：
-* 使用 `GetWindowThreadProcessId` 获取当前枚举窗口的 PID。
-* 对比该 PID 与目标 PID。
-* 如果匹配，检查是否是主窗口（通常通过 `IsWindowVisible` 或 `GetWindow(hwnd, GW_OWNER)` 进一步筛选）。
-* 保存 HWND 并停止枚举。
+    * 使用 `GetWindowThreadProcessId` 获取当前枚举窗口的 PID。
+    * 对比该 PID 与目标 PID。
+    * 如果匹配，检查是否是主窗口（通常通过 `IsWindowVisible` 或 `GetWindow(hwnd, GW_OWNER)` 进一步筛选）。
+    * 保存 HWND 并停止枚举。
 
 
-
----
-
-### C++ 代码示例
+## C++ 代码示例
 
 ```cpp
 #include <windows.h>
@@ -75,9 +70,7 @@ int main() {
 
 ```
 
----
-
-### 关键函数说明
+## 关键函数说明
 
 | 函数 | 作用 |
 | --- | --- |
