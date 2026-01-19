@@ -27,3 +27,13 @@ body {
     background: var(--background);
   }
 }
+
+@font-face {
+  font-family: 'Maple MonoNL CN';
+  font-display: swap;
+  src: url('https://cdn.xplanc.org/fonts/MapleMonoNL-CN-Regular.ttf');
+}
+
+* {
+  font-family: 'Maple MonoNL CN';
+}

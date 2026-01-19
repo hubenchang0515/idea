@@ -1,7 +1,13 @@
+import HomeIcon from "@/assets/icons/HomeIcon";
+import ListIcon from "@/assets/icons/ListIcon";
+import ShareIcon from "@/assets/icons/ShareIcon";
+import Button from "@/components/Button";
 import Card from "@/components/Card";
 import Discussion from "@/components/Discussion";
 import Frame from "@/components/Frame";
+import Link from "@/components/Link";
 import Markdown from "@/components/Markdown";
+import { SITE_CONFIG } from "@/config";
 import { categories as getGategories, content } from "@/utils/document";
 
 export interface PageParams {
@@ -40,6 +46,10 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
     return (
         <Frame categories={categories} articles={articles.slice(0,30)}>
             <Card>
+                <div className="flex justify-between">
+                    <Link href='/'><HomeIcon/></Link>
+                    <Link href={`/${decodeURIComponent(path.category)}`}><ListIcon/></Link>
+                </div>
                 <Markdown content={text}/>
             </Card>
             <Discussion/>

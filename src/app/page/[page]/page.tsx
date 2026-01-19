@@ -1,3 +1,4 @@
+import HomeIcon from "@/assets/icons/HomeIcon";
 import ArticleCard from "@/components/ArticleCard";
 import Frame from "@/components/Frame";
 import Link from "@/components/Link";
@@ -31,6 +32,11 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
 
     return (
         <Frame categories={categories} articles={articles.slice(0, 30)}>
+            <div className="bg-white dark:bg-[#161B22] rounded-md shadow-md p-2 flex justify-between">
+                <Link href={page > 1 ? `/page/${page-1}` : undefined}>上一页</Link>
+                <Link href='/'><HomeIcon/></Link>
+                <Link href={page < last ? `/page/${page+1}` : undefined}>下一页</Link>
+            </div>
             {
                 articles.slice((page - 1)*DOCUMENT_CONFIG.pageSize, (page)*DOCUMENT_CONFIG.pageSize).map((article, i) => {
                     return (
@@ -38,14 +44,11 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
                     )
                 })
             }
-            {
-                (page > 1 || page < last) &&
-                <div className="bg-white dark:bg-[#161B22] rounded-md shadow-md p-2 flex justify-between">
-                    { page > 1 ? <Link href={`/page/${page-1}`}>上一页</Link> : <span/> }
-                    { page < last ? <Link href={`/page/${page+1}`}>下一页</Link> : <span/> }
-                </div>
-            }
-            
+            <div className="bg-white dark:bg-[#161B22] rounded-md shadow-md p-2 flex justify-between">
+                <Link href={page > 1 ? `/page/${page-1}` : undefined}>上一页</Link>
+                <Link href='/'><HomeIcon/></Link>
+                <Link href={page < last ? `/page/${page+1}` : undefined}>下一页</Link>
+            </div>
         </Frame>
     );
 }

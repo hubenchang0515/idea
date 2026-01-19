@@ -2,7 +2,7 @@ import ReactMarkdown, { Components } from 'react-markdown'
 import Image from './Image';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { vscDarkPlus as highlight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Link from './Link';
 
 export interface MarkdownProps {
@@ -27,7 +27,7 @@ const MakeComponents = ():Components => {
     return {
         async h1(props) { 
             return (
-                <h1 className='text-3xl my-4 font-bold text-center text-emerald-600 underline underline-offset-8'>
+                <h1 className='text-3xl my-4 font-bold text-center text-sky-800 dark:text-sky-500 underline underline-offset-8'>
                     {props.children}
                 </h1>
             )
@@ -35,7 +35,7 @@ const MakeComponents = ():Components => {
 
         async h2(props) { 
             return (
-                <h2 className='text-2xl my-3 font-bold text-emerald-600 border-s-4 border-b-1 px-1'>
+                <h2 className='text-2xl my-3 font-bold text-sky-800 dark:text-sky-500 border-s-4 border-b-1 px-1'>
                     {props.children}
                 </h2>
             )
@@ -43,7 +43,7 @@ const MakeComponents = ():Components => {
 
         async h3(props) { 
             return (
-                <h3 className='text-xl my-2 font-bold text-emerald-600'>{props.children}</h3>
+                <h3 className='text-xl my-2 font-bold text-sky-800 dark:text-sky-500'>{props.children}</h3>
             )
         },
 
@@ -81,7 +81,7 @@ const MakeComponents = ():Components => {
 
         async table(props) {
             return (
-                <table className='my-2 max-w-8/10 mx-auto border border-[rgba(0,0,0,0.1)]'>
+                <table className='my-2 max-w-8/10 mx-auto border border-[rgba(0,0,0,0.1)] dark:border-[rgba(255,255,255,0.2)]'>
                     { props.children }
                 </table>
             )
@@ -101,12 +101,12 @@ const MakeComponents = ():Components => {
 
         async th(props) {
             const align = props.node?.properties.align as "center" | "right" | "left" | "justify" | "char" | undefined
-            return <td align={align} className='font-bold p-2 border border-[rgba(0,0,0,0.1)]'>{ props.children }</td>
+            return <td align={align} className='font-bold p-2 border border-[rgba(0,0,0,0.1)] dark:border-[rgba(255,255,255,0.2)]'>{ props.children }</td>
         },
 
         async td(props) {
             const align = props.node?.properties.align as "center" | "right" | "left" | "justify" | "char" | undefined
-            return <td align={align} className='p-2 border border-[rgba(0,0,0,0.1)]'>{ props.children }</td>
+            return <td align={align} className='p-2 border border-[rgba(0,0,0,0.1)] dark:border-[rgba(255,255,255,0.2)]'>{ props.children }</td>
         },
 
         async ol(props) {
@@ -130,7 +130,7 @@ const MakeComponents = ():Components => {
         },
 
         a({href, title, children}) {
-            return <Link href={href} title={title} children={children}/>
+            return <Link href={href} title={title} children={children} className='text-blue-500 dark:text-blue-400 hover:underline'/>
         },
 
         code({className, children}) {
@@ -140,7 +140,7 @@ const MakeComponents = ():Components => {
                 return (
                     <SyntaxHighlighter
                         showLineNumbers
-                        style={oneDark}
+                        style={highlight}
                         className={className} 
                         language={match[1].toLocaleLowerCase()}
                     >
@@ -151,7 +151,7 @@ const MakeComponents = ():Components => {
                 return (
                     <SyntaxHighlighter
                         showLineNumbers
-                        style={oneDark}
+                        style={highlight}
                         className={className}
                     >
                         {String(children).replace(/\n$/, '')}

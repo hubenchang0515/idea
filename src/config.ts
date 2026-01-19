@@ -27,6 +27,12 @@ export const DOCUMENT_CONFIG = {
 // 外链
 export const LINKS = [
     {
+        icon: "https://hubenchang0515.github.io/icons/launcher.svg",
+        title: "我的主页",
+        url: "https://hubenchang0515.github.io/",
+    },
+
+    {
         icon: "https://xplanc.org/primers/favicon.svg",
         title: "Primers 编程伙伴",
         url: "https://xplanc.org/primers/",
@@ -42,5 +48,11 @@ export const LINKS = [
         icon: "https://xplanc.org/QtTheme/icon.svg",
         title: "QtTheme 在线主题",
         url: "https://hubenchang0515.github.io/QtTheme/",
+    },
+
+    {
+        icon: "https://meme.xplanc.org/icon.png",
+        title: "萌萌表情包",
+        url: "https://meme.xplanc.org/",
     },
 ]
