@@ -110,11 +110,11 @@ const MakeComponents = ():Components => {
         },
 
         async ol(props) {
-            return <ol className='ml-6 list-decimal'>{ props.children} </ol>
+            return <ol className='ml-10 list-decimal'>{ props.children} </ol>
         },
 
         async ul(props) {
-            return <ul className='ml-6 list-disc'>{ props.children} </ul>
+            return <ul className='ml-10 list-disc'>{ props.children} </ul>
         },
 
         async li(props) {

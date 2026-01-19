@@ -15,8 +15,8 @@ export default function Frame(props:FrameProps)
 {
     return (
         <div>
-            <main className="w-full max-w-450 m-auto p-2 flex flex-col md:flex-row gap-2">
-                <aside className="order-2 md:order-1 md:w-80">
+            <main className="w-full max-w-[1600px] m-auto p-2 flex flex-col md:flex-row gap-2">
+                <aside className="order-2 md:order-1 md:w-60 xl:w-90">
                     <div className="flex flex-col gap-2">
                         <Card>
                             <p><Link className="block border border-transparent hover:border-emerald-500" href="/"><img src={OWNER_CONFIG.avatar} className="w-40 m-auto my-1"/></Link></p>
@@ -61,7 +61,7 @@ export default function Frame(props:FrameProps)
                 <div className="order-1 md:order-2 flex-1 flex flex-col gap-2 overflow-hidden">
                     { props.children }
                 </div>
-                <aside className="order-3 md:w-80">
+                <aside className="order-3 md:w-60 xl:w-90">
                     <div className="flex flex-col gap-2">
                     {
                         props.articles && 
