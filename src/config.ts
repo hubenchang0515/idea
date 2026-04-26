@@ -45,6 +45,12 @@ export const LINKS = [
     },
 
     {
+        icon: "https://hubenchang0515.github.io/moe-tools/favicon.svg",
+        title: "萌萌工具箱",
+        url: "https://hubenchang0515.github.io/moe-tools/",
+    },
+
+    {
         icon: "https://xplanc.org/QtTheme/icon.svg",
         title: "QtTheme 在线主题",
         url: "https://hubenchang0515.github.io/QtTheme/",
@@ -54,5 +60,11 @@ export const LINKS = [
         icon: "https://meme.xplanc.org/icon.png",
         title: "萌萌表情包",
         url: "https://meme.xplanc.org/",
+    },
+
+    {
+        icon: "https://pdf-shelf.pages.dev/pdf.png",
+        title: "编程书籍分享",
+        url: "https://pdf-shelf.pages.dev/",
     },
 ]

@@ -25,7 +25,7 @@ export default function Frame(props:FrameProps)
                             <p>{OWNER_CONFIG.brief}</p>
                         </Card>
                         <Card>
-                            <div className='grid grid-cols-[repeat(auto-fill,minmax(40px,1fr))] gap-2'>
+                            <div className='grid grid-cols-[repeat(auto-fill,minmax(50px,1fr))] gap-2'>
                                 {
                                     LINKS.map((item, i) => {
                                         return (
