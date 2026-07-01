@@ -50,7 +50,8 @@ git config --global http.https://github.com.proxy socks://localhost:7890   # 代
 
 ```
 Host github.com
-    Hostname github.com
+    Hostname ssh.github.com
+    Port 443
     ServerAliveInterval 55
     ForwardAgent yes
     ProxyCommand nc -x localhost:7890 %h %p
