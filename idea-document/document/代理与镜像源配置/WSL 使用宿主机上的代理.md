@@ -25,7 +25,7 @@ nameserver 192.168.96.1
 
 ## 代理软件
 
-代理软件需要开启允许局域网（Allow LAN）接入。此外，代理软件如果在创建虚拟网卡之前就已经启动，则可能需要重启。
+代理软件需要开启允许局域网（Allow LAN）接入。此外，代理软件如果在创建虚拟网卡之前就已经启动，则可能需要重启代理软件。
 
 ## 防火墙
 
@@ -34,4 +34,10 @@ nameserver 192.168.96.1
 ```powershell
 New-NetFirewallRule -DisplayName "WSL" -Direction Inbound -InterfaceAlias "vEthernet (WSL)" -Action Allow
 New-NetFirewallRule -DisplayName "WSL" -Direction Outbound -InterfaceAlias "vEthernet (WSL)" -Action Allow
+```
+
+配置后可能需要重启 WSL：
+
+```
+wsl --shutdown
 ```
