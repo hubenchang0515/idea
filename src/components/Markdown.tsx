@@ -171,12 +171,13 @@ const MakeComponents = ():Components => {
             const match = /language-(\w+)/.exec(className || '');
 
             if (match) {
+                const lang = match[1].toLocaleLowerCase();
                 return (
                     <SyntaxHighlighter
                         showLineNumbers
                         style={highlight}
                         className={className} 
-                        language={match[1].toLocaleLowerCase()}
+                        language={lang === 'shell' ? 'shell-session' : lang}
                         renderer={({ rows, stylesheet }) => {
                             return (
                                 <code className={className} style={{whiteSpace:'pre'}}>
