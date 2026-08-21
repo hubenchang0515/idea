@@ -109,5 +109,5 @@ $ gsettings set org.gnome.system.proxy use-same-proxy true
 ### 环境变量
 
 ```shell
-echo 'export all_proxy=localhost:7890' >> ~/.bashrc
+$ echo 'export all_proxy=localhost:7890' >> ~/.bashrc
 ```
