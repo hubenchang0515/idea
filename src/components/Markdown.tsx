@@ -4,9 +4,43 @@ import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus as highlight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Link from './Link';
+import DocLink from './DocLink';
 
 export interface MarkdownProps {
     content:string;
+}
+
+function CodeNode(props:{node:rendererNode, stylesheet: { [key: string]: React.CSSProperties }, context:string, rows:number}) {
+    if (props.node.type === 'text') {
+        if (props.node.value === undefined || props.node.value === "") {                        // 空字符串
+            return null
+        } else if (/^\s+$/.test(props.node.value.toString())) {                                 // 空白字符串
+            return <span>{props.node.value}</span>
+        } else if (/^\S+$/.test(props.node.value.toString())) {                                 // 不含空白字符
+            return <DocLink text={props.node.value.toString()} lang={props.context}/>
+        } else {
+            const items = props.node.value.toString().split(/(\s+)/)
+            return items.map((item, i) => <CodeNode key={i} {...props} node={{type:'text', value:item}}/>)
+        }
+        
+    } else if (props.node.type === 'element') {
+        const style = props.node.properties?.className.reduce((result, name) => {
+            result = {...result, ...props.stylesheet[name]};
+            return result;
+        }, {});
+        if (props.node.properties?.className?.includes('linenumber')) {
+            style.display = "inline-block";
+            style.minWidth = `${props.rows}em`;
+            style.paddingRight = "1em";
+            style.textAlign = "right";
+            style.userSelect = "none";
+        }
+        return <span className={props.node.properties?.className.join(" ")} style={style}>
+        {
+            props.node.children?.map((subnode, i) => <CodeNode key={i} {...props} node={subnode} />)
+        }
+        </span>
+    }
 }
 
 export default function Markdown(props: MarkdownProps) {
@@ -143,6 +177,17 @@ const MakeComponents = ():Components => {
                         style={highlight}
                         className={className} 
                         language={match[1].toLocaleLowerCase()}
+                        renderer={({ rows, stylesheet }) => {
+                            return (
+                                <code className={className} style={{whiteSpace:'pre'}}>
+                                {
+                                    rows.map((row) => {
+                                        return row.children?.map((node, i) => <CodeNode key={i} node={node} stylesheet={stylesheet} context={match[1]} rows={rows.length.toString().length}/>)
+                                    })
+                                }
+                                </code>
+                            )
+                        }}
                     >
                         {String(children).replace(/\n$/, '')}
                     </SyntaxHighlighter>
