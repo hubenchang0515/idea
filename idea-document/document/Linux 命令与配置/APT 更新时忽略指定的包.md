@@ -4,12 +4,12 @@
 
 保持包版本不更新:  
 
-```
+```bash
 sudo apt-mark hold <package>
 ```
 
 取消保持包版本:
 
-```
+```bash
 sudo apt-mark unhold <package>
 ```

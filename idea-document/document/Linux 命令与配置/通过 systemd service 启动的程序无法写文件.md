@@ -2,7 +2,7 @@
 
 编译安装 [NetworkManager](https://gitlab.freedesktop.org/NetworkManager/NetworkManager) 之后，网络功能瘫痪。提示 `read-only file system`:  
 
-```
+```shell
 $ nmcli device wifi rescan
 $ nmcli device wifi connect HBC-WiFi
 Error: Failed to add/activate new connection: failure adding connection: 
@@ -12,7 +12,7 @@ failed to create file /usr/etc/NetworkManager/system-connections/HBC-WiFi.nmconn
 
 但是直接使用命令启动 NetworkManager 时没有这个现象，命令可以正常执行。
 
-```
+```shell
 sudo NetworkManager --no-daemon
 ```
 

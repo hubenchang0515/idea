@@ -34,7 +34,7 @@ sudo apt install libfontconfig1-dev \
 ```
 
 **Qt 6.5**:  
-```
+```bash
 sudo apt install libfontconfig1-dev \
                  libfreetype6-dev \
                  libx11-dev \

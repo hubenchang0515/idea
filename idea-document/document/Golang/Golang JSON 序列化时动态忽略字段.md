@@ -71,7 +71,7 @@ func main() {
 }
 ```
 
-```
+```shell
 $ go run .
 {"account":"hubenchang0515","nickname":"planc0515"}
 ```

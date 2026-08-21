@@ -15,7 +15,7 @@
 
 代理类型为 HTTP，代理协议为 HTTP，发起 HTTP 请求:  
 
-```
+```shell
 $ export http_proxy=http://localhost:7890
 $ curl http://www.google.com
 <HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
@@ -28,7 +28,7 @@ The document has moved
 
 代理类型为 HTTP，代理协议为 SOCKS5，发起 HTTP 请求:  
 
-```
+```shell
 $ export http_proxy=socks://localhost:7890
 $ curl http://www.google.com
 <HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
@@ -41,7 +41,7 @@ The document has moved
 
 代理类型为 HTTPS，代理协议为 HTTP，发起 HTTPS 请求:  
 
-```
+```shell
 $ export https_proxy=http://localhost:7890
 $ curl https://www.google.com
 <HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
@@ -54,7 +54,7 @@ The document has moved
 
 代理类型为 HTTPS，代理协议为 SOCKS5，发起 HTTPS 请求:  
 
-```
+```shell
 $ export https_proxy=socks://localhost:7890
 $ curl https://www.google.com
 <HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
@@ -67,7 +67,7 @@ The document has moved
 
 也可以不写明代理协议，代理软件会自动判断:  
 
-```
+```shell
 $ export http_proxy=localhost:7890
 $ curl http://google.com
 <HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">

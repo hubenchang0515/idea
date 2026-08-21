@@ -8,6 +8,6 @@ configure: error: cannot find required auxiliary files: config.guess config.sub
 
 解决办法:  
 
-```
+```bash
 automake --add-missing
 ```

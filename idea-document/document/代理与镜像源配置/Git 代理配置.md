@@ -2,7 +2,7 @@
 
 ## HTTP/HTTPS
 
-```
+```bash
 git config --global http.proxy socks://localhost:7890
 ``` 
 
@@ -20,7 +20,7 @@ git config --global http.proxy socks://localhost:7890
 
 也可以单独配置指定域名的代理:
 
-```
+```bash
 git config --global http.<URL>.proxy socks://localhost:7890
 ```
 
@@ -28,7 +28,7 @@ git config --global http.<URL>.proxy socks://localhost:7890
 
 例如:  
 
-```
+```bash
 git config --global http.http://github.com.proxy socks://localhost:7890    # 代理到 http://github.com
 git config --global http.https://github.com.proxy socks://localhost:7890   # 代理到 https://github.com
 ```

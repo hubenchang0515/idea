@@ -6,7 +6,7 @@
 
 通过 `pipreqs` 可以将当前项目依赖的所有包导出到 `requirements.txt` 中：
 
-```
+```shell
 $ pipreqs . --encoding=utf8 --force 
 ```
 
@@ -15,54 +15,54 @@ $ pipreqs . --encoding=utf8 --force
 
 然后通过该文件即可一键安装所有依赖
 
-```
+```shell
 $ pip install -r requirements.txt
 ```
 
 ## virtualenv
 
 1. 安装
-```
+```shell
 pip install virtualenv
 ```
 
 2. 创建
-```
+```shell
 virtualenv [虚拟环境名称] 
 ```
 
 3. 激活
-```
+```shell
 cd [虚拟环境目录]
 source ./bin/activate
 ```
 
 
 4. 退出
-```
+```shell
 deactivate
 ```
 ## pipenv
 
 1. 安装
-```
+```shell
 pip install pipenv
 ```
 
 2. 创建
-```
+```shell
 pipenv install
 ```
 > 在项目目录里执行，如果没有 `pipfile`，则会创建；如果有则会安装记录在当中的依赖
 
 3. 安装依赖包
-```
+```shell
 pipenv install [包名]
 ```
 > 在项目目录里执行，安装依赖的同时记录到 `pipfile` 中去，如果文件不存在则自动创建
 
 4. 激活
-```
+```shell
 pipenv shell
 ```
 

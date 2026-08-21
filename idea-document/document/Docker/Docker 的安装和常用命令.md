@@ -26,7 +26,7 @@ sudo apt install docker-ce docker-ce-cli containerd.io
 * `ee` 表示企业版(Enterprise Edition)
 
 > 查看是否安装成功
-> ```
+> ```shell
 > $ sudo docker version
 > Client: Docker Engine - Community
 >  Version:           20.10.23
@@ -71,7 +71,7 @@ Environment="HTTPS_PROXY=http://192.168.1.100:7890"
 
 然后重启:  
 
-```
+```shell
 sudo systemctl daemon-reload
 sudo systemctl restart docker
 ```
@@ -100,7 +100,7 @@ sudo systemctl restart docker
 
 ## 自动补全的问题
 > 使用 ubuntu 镜像时，会发现很多命令无法自动补全，需要安装 `bash-completion`
-> ```
+> ```bash
 > apt install bash-completion
 > source /etc/bash_completion
 > ```

@@ -2,14 +2,14 @@
 
 升级时失败
 
-```
+```bash
 sudo apt update
 sudo apt upgrade
 ```
 
 错误信息：  
 
-```
+```shell
 $ sudo apt --fix-broken install
 Reading package lists... Done
 Building dependency tree... Done
@@ -49,6 +49,6 @@ E: Sub-process /usr/bin/dpkg returned an error code (1)
 
 只需要指定使用其中一个包的该文件即可
 
-```
+```bash
 sudo dpkg -i --force-overwrite /var/cache/apt/archives/nvidia-kernel-common-535_535.129.03-0ubuntu1_amd64.deb
 ```

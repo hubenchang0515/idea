@@ -1,7 +1,7 @@
 # hexdump 格式化
 
 hexdump 常用的选项有三个：跳过的字节数（`-s`）、打印的字节数（`-n`）和打印的格式(`-e`)
-```
+```shell
 hexdump [-s SKIP_BYTES] [-n BYTES] [-e FORMAT] 
 ```
 
@@ -19,7 +19,7 @@ hexdump [-s SKIP_BYTES] [-n BYTES] [-e FORMAT]
 
 示例:  
 
-```bash
+```shell
 $ hexdump data.bin # 默认打印
 0000000 3b98 bcbc abdf 0001 cded 08ef 0ac6 e1e0
 0000010 b584 c2c4 41a5 5f14 3ad6 ba58 0533 8757

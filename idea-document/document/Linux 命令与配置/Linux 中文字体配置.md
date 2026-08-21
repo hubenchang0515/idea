@@ -19,7 +19,7 @@
 
 使用 `fc-list` 命令可以查看已安装的字体:  
 
-```
+```shell
 $ fc-list | grep -i source
 /home/planc/.local/share/fonts/SourceHanSansSC-VF.otf: Source Han Sans SC VF:style=Regular
 /usr/share/fonts/truetype/source-han: Source Han Mono SC,思源等宽:style=Regular
@@ -35,7 +35,7 @@ $ fc-list | grep -i source
 * 等宽字体 `monospace-font-name` - 要求字符等宽时使用的字体，例如终端和一些代码编辑器
 * 文档字体 `document-font-name` - 打印时使用的字体
 
-```
+```shell
 $ gsettings set org.gnome.desktop.interface font-name 'Source Han Sans CN 11'
 $ gsettings set org.gnome.desktop.interface monospace-font-name 'Source Han Mono SC 11'
 $ gsettings set org.gnome.desktop.interface document-font-name 'Source Han Sans CN 11'

@@ -21,6 +21,6 @@ GRANT CREATE,ALTER,DROP,INDEX,SELECT,INSERT,UPDATE,DELETE ON <database>.* TO '<u
 
 ## 修改用户密码
 
-```
+```sql
 ALTER USER '<username>'@'localhost' IDENTIFIED WITH mysql_native_password BY '<password>';
 ```

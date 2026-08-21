@@ -2,7 +2,7 @@
 
 在使用 Linux 的时候，如果经常进行升级，时不时会遇到驱动失效的问题:  
 
-```
+```shell
 $ nvidia-smi 
 NVIDIA-SMI has failed because it couldn't communicate with the NVIDIA driver. 
 Make sure that the latest NVIDIA driver is installed and running.
@@ -12,13 +12,13 @@ Make sure that the latest NVIDIA driver is installed and running.
 
 首先通过 `uname` 命令查看当前内核版本，可以看到这里为 `6.5.0-35-generic`:  
 
-```
+```shell
 $ uname -a
 Linux ROG 6.5.0-35-generic #35~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue May  7 09:00:52 UTC 2 x86_64 x86_64 x86_64 GNU/Linux
 ```
 
 然后通过查看当前使用的 NVIDIA 驱动版本，可以看到这里为 `555.42.02`:  
-```
+```shell
 $ ls /usr/src/ | grep nvidia
 nvidia-555.42.02
 ```
@@ -32,7 +32,7 @@ nvidia-555.42.02
 
 安装对应版本的驱动:  
 
-```
+```bash
 sudo apt install nvidia-driver-550
 sudo dkms install -m nvidia -v 550.90.07
 ```

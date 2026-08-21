@@ -31,7 +31,7 @@ debmake -e hubenchang0515@outlook.com -p qttheme -u 1.0.0 -n
 
 执行 `debuild` 命令进行打包：  
 
-```
+```bash
 debuild
 ```
 

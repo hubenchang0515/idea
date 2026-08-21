@@ -131,7 +131,7 @@ void free(void* ptr)
 
 > 构建程序（即下述的 test）时在链接选项中添加 `-rdynamic` 选项导出符号表才能显示函数名，否则只能显示地址。
 
-```
+```shell
 $ LD_PRELOAD=./memcheck.so ./test 
 Leak 233 bytes at 0x559e563c8350
  [0] ./memcheck.so(malloc+0x7b) [0x7f6546b064a7] 

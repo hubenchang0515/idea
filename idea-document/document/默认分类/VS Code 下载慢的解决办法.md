@@ -7,7 +7,7 @@
 
 可以使用下面的 Python 脚本进行下载:  
 
-```bash
+```shell
 $ python vscode-download.py --os linux-deb-x64
 Request https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64
 Redirect to https://az764295.vo.msecnd.net/stable/704ed70d4fd1c6bd6342c436f1ede30d1cff4710/code_1.77.3-1681292746_amd64.deb

@@ -8,9 +8,9 @@
 
 ## 安装交叉工具链
 
-```
-apt update
-apt install gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+```bash
+sudo apt update
+sudo apt install gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
 ```
 
 > 编译裸机(bare-metal)程序时需要使用 aarch64-none-elf 版本的工具链，可以从 [ARM官网](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads) 下载。
@@ -19,14 +19,14 @@ apt install gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
 
 安装依赖:  
 
-```
-apt install build-essential python3 python-is-python3 perl ruby wget xz-utils
+```bash
+sudo apt install build-essential python3 python-is-python3 perl ruby wget xz-utils
 ```
 
 从 Qt 官网的主页进入下载页面需要填写姓名、公司、邮箱、电话等信息，很麻烦。
 可以直接从 [download.qt.io](https://download.qt.io/official_releases/qt/5.15/5.15.8/) 页面下载源码。
 
-```
+```bash
 wget https://download.qt.io/official_releases/qt/5.15/5.15.8/single/qt-everywhere-opensource-src-5.15.8.tar.xz
 tar xvf qt-everywhere-opensource-src-5.15.8.tar.xz
 cd qt-everywhere-opensource-src-5.15.8
@@ -60,7 +60,7 @@ update-alternatives --install $PREFIX/cxx cxx $PREFIX/$PLATFORM-g++ 100
 
 ## 导出镜像
 
-```
+```bash
 sudo docker commit 8cae637c3cc0 aarch64-cross-platform
 sudo docker save -o aarch64-cross-platform.tar aarch64-cross-platform
 ```
@@ -78,8 +78,8 @@ sudo docker save -o aarch64-cross-platform.tar aarch64-cross-platform
 
 目标设备上的 libc 运行时版本为 2.28，而交叉编译环境上的版本为 2.35:  
 
-```
-apt policy libc6-dev-arm64-cross
+```shell
+$ apt policy libc6-dev-arm64-cross
 libc6-dev-arm64-cross:
   Installed: 2.35-0ubuntu1cross3
   Candidate: 2.35-0ubuntu1cross3
@@ -94,7 +94,7 @@ libc6-dev-arm64-cross:
 > 由于 Ubuntu Packages 上没有 2.28 版本的包，因此从 Debian Packages 上下载。  
 > `libc6-arm64-cross_2.28-7cross1_all.deb` 是 `libc6-dev-arm64-cross_2.28-7cross1_all.deb` 的依赖项。  
 
-```
+```bash
 wget http://ftp.cn.debian.org/debian/pool/main/c/cross-toolchain-base/libc6-dev-arm64-cross_2.28-7cross1_all.deb
 wget http://ftp.cn.debian.org/debian/pool/main/c/cross-toolchain-base/libc6-arm64-cross_2.28-7cross1_all.deb
 dpkg -i libc6-arm64-cross_2.28-7cross1_all.deb libc6-dev-arm64-cross_2.28-7cross1_all.deb
@@ -110,8 +110,8 @@ dpkg -i libc6-arm64-cross_2.28-7cross1_all.deb libc6-dev-arm64-cross_2.28-7cross
 
 需要将软链接改回 x86_64 架构:  
 
-```
-root@aarch64 # update-alternatives --config cxx
+```shell
+root@aarch64# update-alternatives --config cxx
 There are 4 choices for the alternative cxx (providing /usr/bin/cxx).
 
   Selection    Path                               Priority   Status
@@ -129,7 +129,7 @@ update-alternatives: using /usr/bin/x86_64-linux-gnu-g++ to provide /usr/bin/cxx
 
 然后通过 `-xplatform` 选择交叉工具链进行编译:  
 
-```
+```bash
 ./configure -opensource -confirm-license -release -xplatform linux-aarch64-gnu-g++ -no-opengl
 make
 ```

@@ -11,7 +11,7 @@ Environment="HTTPS_PROXY=http://192.168.1.100:7890"
 
 然后重启:  
 
-```
+```bash
 sudo systemctl daemon-reload
 sudo systemctl restart docker
 ```

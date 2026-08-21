@@ -3,7 +3,7 @@
 KDE 的系统设置中已经提示了，一些应用程序可能不会使用这个代理。因为在 Linux 上有很多配置代理的方式，不同的应用程序可能读取了不同的配置。
 而 KDE 的系统设置使用的是自家的 **KConfig**，基本只有 KDE 自己支持，很少有其他应用程序兼容。
 
-```
+```shell
 $ kreadconfig5 --file kioslaverc --group 'Proxy Settings' --key httpProxy
 localhost 7890
 
@@ -23,7 +23,7 @@ socksProxy=localhost 7890
 
 大部分应用程序采用 **gsettings** 中的代理配置:  
 
-```
+```shell
 $ gsettings list-recursively | grep proxy
 org.gnome.evolution.shell.network-config proxy-type 0
 org.gnome.evolution.shell.network-config use-http-proxy false
@@ -47,7 +47,7 @@ org.gnome.system.proxy.socks port 7890
 
 少数应用程序使用环境变量中的代理配置:  
 
-```
+```shell
 $ env | grep proxy
 no_proxy=localhost,127.0.0.0/8,::1
 ftp_proxy=http://localhost:7890/

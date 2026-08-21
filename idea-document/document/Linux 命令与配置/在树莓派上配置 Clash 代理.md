@@ -2,7 +2,7 @@
 
 ## 编译 clash 源码
 
-```
+```bash
 git clone https://github.com/Dreamacro/clash.git
 cd clash
 go build
@@ -10,7 +10,7 @@ sudo cp clash /usr/bin
 ```
 
 > 如果遇到依赖包无法下载的问题，可以配置 GOPROXY，参考 [goproxy.io](https://goproxy.io/zh/)。
-> ```
+> ```shell
 > $ export GOPROXY=https://proxy.golang.com.cn,direct
 > ```
 
@@ -19,7 +19,7 @@ sudo cp clash /usr/bin
 > 这是因为 debian bullseye 的 golang 版本为 1.15，而 embed 是 1.16 版本新增的。
 > 
 > 可以安装 bullseye-backports 的版本。
-> ```
+> ```shell
 > $ apt policy golang-go
 > golang-go:
 >   Installed: 2:1.15~1
@@ -32,6 +32,7 @@ sudo cp clash /usr/bin
 >         500 https://mirrors.tuna.tsinghua.edu.cn/debian bullseye/main arm64 Packages
 > 
 > $ sudo apt install golang-go=2:1.19~1~bpo11+1 golang-src=2:1.19~1~bpo11+1
+> ```
 
 ## 编辑配置文件
 
@@ -39,12 +40,12 @@ sudo cp clash /usr/bin
 
 ## 启动 clash
 
-```
+```shell
 $ clash -d /etc/clash
 ```
 
 > 如果遇到 `Can't find MMDB, start download` 并且下载失败的问题，可以手动下载并放到配置文件目录中。  
-> ```
+> ```shell
 > $ wget https://cdn.jsdelivr.net/gh/Dreamacro/maxmind-geoip@release/Country.mmdb -P /etc/clash/
 > ```
 
@@ -73,22 +74,22 @@ WantedBy=multi-user.target
 ```
 
 更新配置   
-```
+```shell
 $ sudo systemctl daemon-reload
 ```
 
 启动 clash  
-```
+```shell
 $ sudo systemctl start clash.service
 ```
 
 查看启动是否成功  
-```
+```shell
 $ sudo systemctl status clash.service
 ```
 
 设置自动启动  
-```
+```shell
 $ sudo systemctl enable clash.service
 ```
 
@@ -97,7 +98,7 @@ $ sudo systemctl enable clash.service
 
 ### gsettings
 
-```
+```shell
 $ gsettings set org.gnome.system.proxy mode manual
 $ gsettings set org.gnome.system.proxy.http host localhost
 $ gsettings set org.gnome.system.proxy.http port 7890
@@ -107,6 +108,6 @@ $ gsettings set org.gnome.system.proxy use-same-proxy true
 
 ### 环境变量
 
-```
+```shell
 echo 'export all_proxy=localhost:7890' >> ~/.bashrc
 ```

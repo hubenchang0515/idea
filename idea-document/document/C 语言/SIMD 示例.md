@@ -20,7 +20,7 @@ _mm256_store_pd(o, m256x);                           // 读出结果，必须 32
 > 使用 gcc 编译时，需要附带 `-mavx2` 选项。
 
 在 Linux 上，执行 `cat /proc/cpuinfo | grep flags` 命令可以查看 CPU 支持哪些特性:  
-```
+```shell
 $ cat /proc/cpuinfo | grep flags
 flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat 
 pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp 

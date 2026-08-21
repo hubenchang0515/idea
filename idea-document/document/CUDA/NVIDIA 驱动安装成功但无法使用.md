@@ -2,7 +2,7 @@
 
 ## 现象
 
-```
+```shell
 $ nvidia-smi
 NVIDIA-SMI has failed because it couldn’t communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and running.
 

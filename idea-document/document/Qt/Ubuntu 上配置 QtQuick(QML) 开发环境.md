@@ -1,7 +1,7 @@
 # Ubuntu 上配置 QtQuick/QML 开发环境
 
 安装以下包:  
-```
+```bash
 sudo apt install qtbase5-dev              # Qt5 基础开发包
 sudo apt install qtquickcontrols2-5-dev   # QtQuick 基础开发包
 sudo apt install qtdeclarative5-dev       # Qt5 的 CMake 模块

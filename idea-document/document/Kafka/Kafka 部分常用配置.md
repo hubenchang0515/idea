@@ -14,7 +14,7 @@ Kafka 有两种使用方式：基于 zookeeper 和基于 kraft.
 
 初始化: 
 
-```bash
+```shell
 $ ./bin/kafka-storage.sh random-uuid
 j5aJA66HT-uI4aMHcmfTsg
 $ ./bin/kafka-storage.sh format -t j5aJA66HT-uI4aMHcmfTsg -c ./config/kraft/server.properties 
