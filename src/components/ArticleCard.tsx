@@ -8,7 +8,10 @@ export default async function ArticleCard(props:ArticleProps) {
     return (
         <Card className="bg-white dark:bg-[#161B22] dark:border dark:border-[#30363d] rounded-md shadow-md">
             <div className='p-2 '>
-                <Markdown content={text.split('\n').slice(0, 10).join('\n')}/>
+                <Markdown 
+                    content={text.split('\n').slice(0, 10).join('\n')}
+                    href={`/${encodeURIComponent(props.category)}/${encodeURIComponent(props.name)}`} 
+                />
             </div>
             <Link 
                 href={`/${encodeURIComponent(props.category)}/${encodeURIComponent(props.name)}`} 

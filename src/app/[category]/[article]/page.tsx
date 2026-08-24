@@ -42,6 +42,7 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
     const text = await content(decodeURIComponent(path.category), decodeURIComponent(path.article));
     const categories = await getGategories();
     const articles = categories.flatMap(category => category.articles).sort((x, y) => y.state.createdTime.getTime() - x.state.createdTime.getTime());
+    const href = `${SITE_CONFIG.origin}${SITE_CONFIG.basePath}/${path.category}/${path.article}`;
 
     return (
         <Frame categories={categories} articles={articles.slice(0,30)}>
@@ -50,7 +51,7 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
                     <Link href='/'><HomeIcon/></Link>
                     <Link href={`/${decodeURIComponent(path.category)}`}><ListIcon/></Link>
                 </div>
-                <Markdown content={text}/>
+                <Markdown content={text} href={href}/>
             </Card>
             <Discussion/>
         </Frame>

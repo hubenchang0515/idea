@@ -6,8 +6,23 @@ import { vscDarkPlus as highlight } from 'react-syntax-highlighter/dist/esm/styl
 import Link from './Link';
 import DocLink from './DocLink';
 
+export async function hash(algorithm:string, data:BufferSource) {
+    const hashBuffer = await crypto.subtle.digest(algorithm, data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer)); // convert buffer to byte array
+    const hashHex = hashArray
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join(""); // convert bytes to hex string
+    return hashHex;
+}
+
+// 哈希锚点
+export async function anchorHash(text:string) {
+    return (await hash('SHA-256', new TextEncoder().encode(text))).substring(0, 6);
+}
+
 export interface MarkdownProps {
     content:string;
+    href:string;
 }
 
 function CodeNode(props:{node:rendererNode, stylesheet: { [key: string]: React.CSSProperties }, context:string, rows:number}) {
@@ -49,7 +64,7 @@ export default function Markdown(props: MarkdownProps) {
         <article className='markdown-body'>
             <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
-                components={MakeComponents()}
+                components={MakeComponents(props.href)}
             >
                 {props.content}
             </ReactMarkdown>
@@ -57,45 +72,87 @@ export default function Markdown(props: MarkdownProps) {
     )
 }
 
-const MakeComponents = ():Components => {
+const MakeComponents = (href:string):Components => {
     return {
         async h1(props) { 
             return (
                 <h1 className='text-3xl my-4 font-bold text-center text-sky-800 dark:text-sky-500 underline underline-offset-8'>
+                    <Link 
+                        href={href} className='cursor-pointor'
+                    >
                     {props.children}
+                    </Link>
                 </h1>
             )
         },
 
         async h2(props) { 
+            const anchor = await anchorHash(props.children?.toString()??'');
             return (
-                <h2 className='text-2xl my-3 font-bold text-sky-800 dark:text-sky-500 border-s-4 border-b-1 px-1'>
-                    {props.children}
+                <h2 id={anchor} className='text-2xl my-3 font-bold text-sky-800 dark:text-sky-500 border-s-4 border-b-1 px-1'>
+                    <Link 
+                        href={href + `#` + anchor}
+                        className='cursor-pointor'
+                    >
+                        {props.children}
+                    </Link>
                 </h2>
             )
         },
 
         async h3(props) { 
+            const anchor = await anchorHash(props.children?.toString()??'');
             return (
-                <h3 className='text-xl my-2 font-bold text-sky-800 dark:text-sky-500'>{props.children}</h3>
+                <h3 id={anchor} className='text-xl my-2 font-bold text-sky-800 dark:text-sky-500'>
+                    <Link 
+                        href={href + `#` + anchor}
+                        className='cursor-pointor'
+                    >
+                        {props.children}
+                    </Link>
+                </h3>
             )
         },
 
         async h4(props) { 
+            const anchor = await anchorHash(props.children?.toString()??'');
             return (
-                <h4 className='text-md my-2 font-bold'>{props.children}</h4>
+                <h4 id={anchor} className='text-md my-2 font-bold'>
+                    <Link 
+                        href={href + `#` + anchor}
+                        className='cursor-pointor'
+                    >
+                        {props.children}
+                    </Link>
+                </h4>
             )
         },
 
         async h5(props) { 
+            const anchor = await anchorHash(props.children?.toString()??'');
             return (
-                <h5 className='text-md my-2 font-bold'>{props.children}</h5>
+                <h5 id={anchor} className='text-md my-2 font-bold'>
+                    <Link 
+                        href={href + `#` + anchor}
+                        className='cursor-pointor'
+                    >
+                        {props.children}
+                    </Link>
+                </h5>
             )
         },
 
         async h6(props) { 
+            const anchor = await anchorHash(props.children?.toString()??'');
             return (
-                <h6 className='text-md my-2 font-bold'>{props.children}</h6>
+                <h6 id={anchor} className='text-md my-2 font-bold'>
+                    <Link 
+                        href={href + `#` + anchor}
+                        className='cursor-pointor'
+                    >
+                        {props.children}
+                    </Link>
+                </h6>
             )
         },
 
