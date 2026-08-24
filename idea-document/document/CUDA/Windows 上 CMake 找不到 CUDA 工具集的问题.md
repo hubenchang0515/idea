@@ -8,7 +8,7 @@ CMake Error at C:/Program Files/CMake/share/cmake-3.22/Modules/CMakeDetermineCom
 
 需要将 CUDA 目录里的 MSBuildExtensions 赋值 Visual Studio 的目录中:  
 
-```
+```bash
 cp "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5\extras\visual_studio_integration\MSBuildExtensions\*" "C:\Program Files\Microsoft Visual Studio\2022\Community\Msbuild\Microsoft\VC\v170\BuildCustomizations"
 ```
 
