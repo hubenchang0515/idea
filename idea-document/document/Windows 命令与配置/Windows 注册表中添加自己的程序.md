@@ -35,7 +35,7 @@ Windows Registry Editor Version 5.00
 
 添加 `HKEY_CURRENT_USER\SOFTWARE\Classes\<ApplicationName>.exe` 子项，它包含以下子项：  
 
-* `shell` - 提高从 *打开方式* 中启动程序时的命令
+* `shell` - 提供从 *打开方式* 中启动程序时执行的命令
 * `FriendlyAppName` - 应用程序显示的名称
 * `SupportedTypes` - 关联的文件类型，右键这些类型的文件时可以在 *打开方式* 中显示此程序
 * `Application` - 应用的描述信息
