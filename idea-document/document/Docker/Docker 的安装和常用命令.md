@@ -117,3 +117,23 @@ if ! shopt -oq posix; then
   fi
 fi
 ```
+
+## 清理空间
+
+* 清理虚悬镜像（Dangling Images）（通常由于新构建镜像覆盖旧镜像产生），它们完全不被任何容器使用：
+
+  ```bash
+  sudo docker image prune
+  ```
+
+* 清理所有未被使用的镜像，除了虚悬镜像，连同所有当前没有被任何容器（无论运行中还是已停止）挂载的镜像全部删掉：
+
+  ```bash
+  sudo docker image prune -a
+  ```
+
+* 一键彻底大扫除，一次性把多余的镜像、已停止的容器、未使用的网络和卷全部清空：
+
+  ```bash
+  sudo docker system prune -a --volumes
+  ```
