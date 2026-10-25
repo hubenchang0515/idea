@@ -19,6 +19,7 @@ export default function Discussion() {
                 theme='preferred_color_scheme'
                 lang='zh-CN'
                 loading="lazy"
+                strict="1"
             />
         </Card>
     );
