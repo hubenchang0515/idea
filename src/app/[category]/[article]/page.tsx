@@ -1,7 +1,5 @@
 import HomeIcon from "@/assets/icons/HomeIcon";
 import ListIcon from "@/assets/icons/ListIcon";
-import ShareIcon from "@/assets/icons/ShareIcon";
-import Button from "@/components/Button";
 import Card from "@/components/Card";
 import Discussion from "@/components/Discussion";
 import Frame from "@/components/Frame";
@@ -39,19 +37,44 @@ export async function generateStaticParams() {
 
 export default async function Page({params}:{params:Promise<PageParams>}) {
     const path = await params;
-    const text = await content(decodeURIComponent(path.category), decodeURIComponent(path.article));
+    const categoryName = decodeURIComponent(path.category);
+    const articleName = decodeURIComponent(path.article);
+    const text = await content(categoryName, articleName);
     const categories = await getGategories();
     const articles = categories.flatMap(category => category.articles).sort((x, y) => y.state.createdTime.getTime() - x.state.createdTime.getTime());
+    const article = categories.find((item) => item.name === categoryName)?.articles.find((item) => item.name === articleName);
     const href = `${SITE_CONFIG.origin}${SITE_CONFIG.basePath}/${path.category}/${path.article}`;
+    const title = articleName.replace(/\.md$/, '');
+    const categoryHref = `/${path.category}`;
+    const created = article ? new Intl.DateTimeFormat('zh-CN', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+    }).format(article.state.createdTime) : undefined;
 
     return (
         <Frame categories={categories} articles={articles.slice(0,30)}>
-            <Card>
-                <div className="flex justify-between">
-                    <Link href='/'><HomeIcon/></Link>
-                    <Link href={`/${decodeURIComponent(path.category)}`}><ListIcon/></Link>
+            <Card className="glass overflow-hidden rounded-2xl p-0">
+                <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border)] px-4 py-3">
+                    <nav className="flex min-w-0 items-center gap-1.5 text-xs text-[var(--muted)]">
+                        <Link href="/" className="transition-colors hover:text-emerald-600 dark:hover:text-emerald-400">首页</Link>
+                        <span className="opacity-40">/</span>
+                        <Link href={categoryHref} className="transition-colors hover:text-emerald-600 dark:hover:text-emerald-400">{categoryName}</Link>
+                        <span className="opacity-40">/</span>
+                        <span className="truncate text-[var(--foreground)] opacity-80">{title}</span>
+                    </nav>
+                    <div className="flex items-center gap-1 text-[var(--muted)]">
+                        {
+                            created &&
+                            <span className="mr-1 hidden text-xs sm:inline">{created}</span>
+                        }
+                        <Link href="/" className="icon-btn" title="返回首页"><HomeIcon/></Link>
+                        <Link href={categoryHref} className="icon-btn" title="分类列表"><ListIcon/></Link>
+                    </div>
                 </div>
-                <Markdown content={text} href={href}/>
+                <div className="px-4 py-3 sm:px-6">
+                    <Markdown content={text} href={href}/>
+                </div>
             </Card>
             <Discussion/>
         </Frame>

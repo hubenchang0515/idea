@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { SITE_CONFIG } from "@/config";
 
@@ -8,6 +8,13 @@ export const metadata: Metadata = {
   icons: {
     icon: `${SITE_CONFIG.basePath}/favicon.svg`,
   }
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#eef7ff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0b1120' },
+  ],
 };
 
 export default function RootLayout({

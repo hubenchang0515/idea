@@ -1,7 +1,6 @@
-import HomeIcon from "@/assets/icons/HomeIcon";
 import ArticleCard from "@/components/ArticleCard";
 import Frame from "@/components/Frame";
-import Link from "@/components/Link";
+import Pagination from "@/components/Pagination";
 import { DOCUMENT_CONFIG } from "@/config";
 import { categories as getGategories } from "@/utils/document";
 
@@ -19,11 +18,11 @@ export default async function Home() {
                     )
                 })
             }
-            <div className="bg-white dark:bg-[#161B22] rounded-md shadow-md p-2 flex justify-between">
-                <Link>上一页</Link>
-                <Link href='/'><HomeIcon/></Link>
-                <Link href={last > 1? `/page/2` : undefined}>下一页</Link>
-            </div>
+            <Pagination
+                next={last > 1 ? `/page/2` : undefined}
+                current={1}
+                total={last}
+            />
             
         </Frame>
     );

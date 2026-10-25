@@ -1,10 +1,8 @@
-import HomeIcon from "@/assets/icons/HomeIcon";
 import ArticleCard from "@/components/ArticleCard";
 import Frame from "@/components/Frame";
-import Link from "@/components/Link";
-import Markdown from "@/components/Markdown";
+import Pagination from "@/components/Pagination";
 import { DOCUMENT_CONFIG } from "@/config";
-import { categories as getGategories, content } from "@/utils/document";
+import { categories as getGategories } from "@/utils/document";
 
 export interface PageParams {
     category:string;    // 分类： 例如 Python 等
@@ -37,11 +35,11 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
 
     return (
         <Frame categories={categories} articles={articles.slice(0, 30)}>
-            <div className="bg-white dark:bg-[#161B22] rounded-md shadow-md p-2 flex justify-between">
-                <Link>上一页</Link>
-                <Link href='/'><HomeIcon/></Link>
-                <Link href={last > 1 ? `/${path.category}/page/2` : undefined}>下一页</Link>
-            </div>
+            <Pagination
+                next={last > 1 ? `/${path.category}/page/2` : undefined}
+                current={1}
+                total={last}
+            />
             {
                 category?.articles.slice(0, DOCUMENT_CONFIG.pageSize).map((article, i) => {
                     return (
@@ -49,11 +47,11 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
                     )
                 })
             }
-            <div className="bg-white dark:bg-[#161B22] rounded-md shadow-md p-2 flex justify-between">
-                <Link>上一页</Link>
-                <Link href='/'><HomeIcon/></Link>
-                <Link href={last > 1 ? `/${path.category}/page/2` : undefined}>下一页</Link>
-            </div>
+            <Pagination
+                next={last > 1 ? `/${path.category}/page/2` : undefined}
+                current={1}
+                total={last}
+            />
         </Frame>
     )
 }

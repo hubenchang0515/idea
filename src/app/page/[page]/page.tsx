@@ -1,7 +1,6 @@
-import HomeIcon from "@/assets/icons/HomeIcon";
 import ArticleCard from "@/components/ArticleCard";
 import Frame from "@/components/Frame";
-import Link from "@/components/Link";
+import Pagination from "@/components/Pagination";
 import { DOCUMENT_CONFIG } from "@/config";
 import { categories as getGategories } from "@/utils/document";
 
@@ -32,11 +31,12 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
 
     return (
         <Frame categories={categories} articles={articles.slice(0, 30)}>
-            <div className="bg-white dark:bg-[#161B22] rounded-md shadow-md p-2 flex justify-between">
-                <Link href={page > 1 ? `/page/${page-1}` : undefined}>上一页</Link>
-                <Link href='/'><HomeIcon/></Link>
-                <Link href={page < last ? `/page/${page+1}` : undefined}>下一页</Link>
-            </div>
+            <Pagination
+                prev={page > 1 ? `/page/${page-1}` : undefined}
+                next={page < last ? `/page/${page+1}` : undefined}
+                current={page}
+                total={last}
+            />
             {
                 articles.slice((page - 1)*DOCUMENT_CONFIG.pageSize, (page)*DOCUMENT_CONFIG.pageSize).map((article, i) => {
                     return (
@@ -44,11 +44,12 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
                     )
                 })
             }
-            <div className="bg-white dark:bg-[#161B22] rounded-md shadow-md p-2 flex justify-between">
-                <Link href={page > 1 ? `/page/${page-1}` : undefined}>上一页</Link>
-                <Link href='/'><HomeIcon/></Link>
-                <Link href={page < last ? `/page/${page+1}` : undefined}>下一页</Link>
-            </div>
+            <Pagination
+                prev={page > 1 ? `/page/${page-1}` : undefined}
+                next={page < last ? `/page/${page+1}` : undefined}
+                current={page}
+                total={last}
+            />
         </Frame>
     );
 }

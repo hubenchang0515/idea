@@ -76,7 +76,7 @@ const MakeComponents = (href:string):Components => {
     return {
         async h1(props) { 
             return (
-                <h1 className='text-3xl my-4 font-bold text-center text-sky-800 dark:text-sky-500 underline underline-offset-8'>
+                <h1 className='text-3xl my-6 font-bold text-center text-slate-800 dark:text-sky-300 underline decoration-emerald-400/60 decoration-2 underline-offset-8'>
                     <Link 
                         href={href} className='cursor-pointor'
                     >
@@ -89,7 +89,7 @@ const MakeComponents = (href:string):Components => {
         async h2(props) { 
             const anchor = await anchorHash(props.children?.toString()??'');
             return (
-                <h2 id={anchor} className='text-2xl my-3 font-bold text-sky-800 dark:text-sky-500 border-s-4 border-b-1 px-1'>
+                <h2 id={anchor} className='text-2xl my-5 font-bold text-slate-800 dark:text-sky-300 border-s-4 border-emerald-400 ps-2'>
                     <Link 
                         href={href + `#` + anchor}
                         className='cursor-pointor'
@@ -103,7 +103,7 @@ const MakeComponents = (href:string):Components => {
         async h3(props) { 
             const anchor = await anchorHash(props.children?.toString()??'');
             return (
-                <h3 id={anchor} className='text-xl my-2 font-bold text-sky-800 dark:text-sky-500'>
+                <h3 id={anchor} className='text-xl my-3 font-bold text-slate-800 dark:text-sky-300'>
                     <Link 
                         href={href + `#` + anchor}
                         className='cursor-pointor'
@@ -117,7 +117,7 @@ const MakeComponents = (href:string):Components => {
         async h4(props) { 
             const anchor = await anchorHash(props.children?.toString()??'');
             return (
-                <h4 id={anchor} className='text-md my-2 font-bold'>
+                <h4 id={anchor} className='text-base my-2 font-bold text-slate-800 dark:text-slate-200'>
                     <Link 
                         href={href + `#` + anchor}
                         className='cursor-pointor'
@@ -131,7 +131,7 @@ const MakeComponents = (href:string):Components => {
         async h5(props) { 
             const anchor = await anchorHash(props.children?.toString()??'');
             return (
-                <h5 id={anchor} className='text-md my-2 font-bold'>
+                <h5 id={anchor} className='text-base my-2 font-bold text-slate-800 dark:text-slate-200'>
                     <Link 
                         href={href + `#` + anchor}
                         className='cursor-pointor'
@@ -145,7 +145,7 @@ const MakeComponents = (href:string):Components => {
         async h6(props) { 
             const anchor = await anchorHash(props.children?.toString()??'');
             return (
-                <h6 id={anchor} className='text-md my-2 font-bold'>
+                <h6 id={anchor} className='text-base my-2 font-bold text-slate-800 dark:text-slate-200'>
                     <Link 
                         href={href + `#` + anchor}
                         className='cursor-pointor'
@@ -164,7 +164,7 @@ const MakeComponents = (href:string):Components => {
 
         async blockquote(props) {
             return (
-                <blockquote className='my-2 px-1 border border-s-4 border-emerald-600'>
+                <blockquote className='my-3 px-3 py-2 border border-s-4 border-emerald-500/60 bg-emerald-500/5 rounded-e-lg'>
                     {props.children}
                 </blockquote>
             )
@@ -172,7 +172,7 @@ const MakeComponents = (href:string):Components => {
 
         async table(props) {
             return (
-                <table className='my-2 max-w-8/10 mx-auto border border-[rgba(0,0,0,0.1)] dark:border-[rgba(255,255,255,0.2)]'>
+                <table className='my-3 max-w-full mx-auto border border-[var(--border)]'>
                     { props.children }
                 </table>
             )
@@ -192,12 +192,12 @@ const MakeComponents = (href:string):Components => {
 
         async th(props) {
             const align = props.node?.properties.align as "center" | "right" | "left" | "justify" | "char" | undefined
-            return <td align={align} className='font-bold p-2 border border-[rgba(0,0,0,0.1)] dark:border-[rgba(255,255,255,0.2)]'>{ props.children }</td>
+            return <td align={align} className='font-bold p-2 border border-[var(--border)]'>{ props.children }</td>
         },
 
         async td(props) {
             const align = props.node?.properties.align as "center" | "right" | "left" | "justify" | "char" | undefined
-            return <td align={align} className='p-2 border border-[rgba(0,0,0,0.1)] dark:border-[rgba(255,255,255,0.2)]'>{ props.children }</td>
+            return <td align={align} className='p-2 border border-[var(--border)]'>{ props.children }</td>
         },
 
         async ol(props) {
@@ -213,19 +213,24 @@ const MakeComponents = (href:string):Components => {
         },
 
         img({ src, alt }) {
-            return <Image src={src as string} alt={alt} style={{display:'block', margin:'auto', maxWidth:'80%', height:'auto',}}/>
+            return <Image src={src as string} alt={alt} style={{display:'block', margin:'1.5rem auto', maxWidth:'90%', height:'auto', borderRadius:'0.9rem'}}/>
         },
 
         pre({children}) {
-            return <div>{children}</div>
+            return <div className="my-3">{children}</div>
         },
 
         a({href, title, children}) {
-            return <Link href={href} title={title} children={children} className='text-blue-500 dark:text-blue-400 hover:underline'/>
+            return <Link href={href} title={title} className='text-blue-500 dark:text-blue-400 hover:underline'>{children}</Link>
         },
 
         code({className, children}) {
+            const source = String(children ?? '');
             const match = /language-(\w+)/.exec(className || '');
+
+            if (!source.trim()) {
+                return null;
+            }
 
             if (match) {
                 const lang = match[1].toLocaleLowerCase();
@@ -247,22 +252,22 @@ const MakeComponents = (href:string):Components => {
                             )
                         }}
                     >
-                        {String(children).replace(/\n$/, '')}
+                        {source.replace(/\n$/, '')}
                     </SyntaxHighlighter>
                 )
-            } else if(children?.toString().includes('\n')) {
+            } else if(source.includes('\n')) {
                 return (
                     <SyntaxHighlighter
                         showLineNumbers
                         style={highlight}
                         className={className}
                     >
-                        {String(children).replace(/\n$/, '')}
+                        {source.replace(/\n$/, '')}
                     </SyntaxHighlighter>
                 )
             } else {
                 return (
-                    <code className="bg-pink-50 text-pink-500 px-1">
+                    <code className="bg-pink-50 text-pink-600 dark:bg-pink-500/15 dark:text-pink-300 px-1.5 py-0.5 rounded text-[0.9em]">
                         {children}
                     </code>
                 )
