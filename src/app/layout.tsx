@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { SITE_CONFIG } from "@/config";
-import { GlobalStateProvider } from "@/components/GlobalState";
 
 export const metadata: Metadata = {
   title: SITE_CONFIG.title,
@@ -19,9 +18,7 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <body>
-        <GlobalStateProvider>
-          {children}
-        </GlobalStateProvider>
+        {children}
       </body>
     </html>
   );

@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "tsx scripts/fetch-primers-sitemap.ts",
     "dev": "next dev",
+    "prebuild": "tsx scripts/fetch-primers-sitemap.ts",
     "build": "next build",
+    "fetch:sitemap": "tsx scripts/fetch-primers-sitemap.ts",
     "start": "next start",
     "lint": "eslint",
     "deploy": "npm run deploy:vercel",
@@ -33,6 +36,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.1.3",
     "probe-image-size": "^7.2.3",
+    "tsx": "^4.23.15",
     "typescript": "^5",
     "vercel": "^59.23.2"
   }
