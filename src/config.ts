@@ -33,15 +33,15 @@ export const LINKS = [
     },
 
     {
-        icon: "https://xplanc.org/primers/favicon.svg",
+        icon: "https://primers.xplanc.org/favicon.svg",
         title: "Primers 编程伙伴",
-        url: "https://xplanc.org/primers/",
+        url: "https://primers.xplanc.org/",
     },
 
     {
-        icon: "https://xplanc.org/shift/favicon.svg",
+        icon: "https://shift.js.org/favicon.svg",
         title: "Shift 在线编程",
-        url: "https://xplanc.org/shift/",
+        url: "https://shift.js.org/",
     },
 
     {
