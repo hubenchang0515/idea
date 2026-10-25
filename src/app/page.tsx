@@ -1,8 +1,16 @@
+import type { Metadata } from "next";
 import ArticleCard from "@/components/ArticleCard";
 import Frame from "@/components/Frame";
 import Pagination from "@/components/Pagination";
 import { DOCUMENT_CONFIG } from "@/config";
 import { categories as getGategories } from "@/utils/document";
+import { absoluteUrl } from "@/utils/seo";
+
+export const metadata: Metadata = {
+    alternates: {
+        canonical: absoluteUrl('/'),
+    },
+};
 
 export default async function Home() {
     const categories = await getGategories();

@@ -3,7 +3,7 @@ export const SITE_CONFIG = {
     origin: 'https://idea.xplanc.org',
     basePath: '',
     title: '想法',
-    brand: '想法',
+    brand: '想法 · Plan C 的编程笔记',
     repo: 'https://github.com/hubenchang0515/idea',
     description: '像云又像风'
 }

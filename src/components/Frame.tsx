@@ -23,7 +23,7 @@ export default function Frame(props:FrameProps)
                     <Link href="/" className="group flex items-center gap-2.5">
                         <img src={`${SITE_CONFIG.basePath}/favicon.svg`} alt="" className="size-9 transition-transform duration-300 group-hover:scale-105 drop-shadow-sm" />
                         <span className="flex flex-col leading-tight">
-                            <span className="text-base font-bold tracking-wide text-[var(--foreground)]">{SITE_CONFIG.brand}</span>
+                            <span className="text-base font-bold tracking-wide text-[var(--foreground)]">{SITE_CONFIG.title}</span>
                             <span className="text-[11px] text-[var(--muted)]">{SITE_CONFIG.description}</span>
                         </span>
                     </Link>
@@ -101,9 +101,9 @@ export default function Frame(props:FrameProps)
                                 {
                                     props.articles?.map((item, i) => {
                                         return (
-                                            <Link key={i} title={item.name.replace(/\.md$/, '')} href={`/${encodeURIComponent(item.category)}/${encodeURIComponent(item.name)}`} className="group flex items-start gap-2 rounded-xl px-2.5 py-1.5 text-sm text-[var(--muted)] transition-colors hover:bg-white/70 hover:text-[var(--foreground)] dark:hover:bg-white/10">
-                                                <span className="mt-2 size-1.5 shrink-0 rounded-full bg-gradient-to-r from-sky-400 to-emerald-400 opacity-60 transition-opacity group-hover:opacity-100" />
-                                                <span className="line-clamp-2 leading-relaxed">{item.name.replace(/\.md$/, '')}</span>
+                                            <Link key={i} title={item.name.replace(/\.md$/, '')} href={`/${encodeURIComponent(item.category)}/${encodeURIComponent(item.name)}`} className="group flex items-center gap-2 rounded-xl px-2.5 py-1.5 text-sm text-[var(--muted)] transition-colors hover:bg-white/70 hover:text-[var(--foreground)] dark:hover:bg-white/10">
+                                                <span className="size-1.5 shrink-0 rounded-full bg-gradient-to-r from-sky-400 to-emerald-400 opacity-60 transition-opacity group-hover:opacity-100" />
+                                                <span className="min-w-0 flex-1 truncate">{item.name.replace(/\.md$/, '')}</span>
                                             </Link>
                                         )
                                     })
@@ -116,7 +116,7 @@ export default function Frame(props:FrameProps)
             </main>
             <footer className="mx-auto w-full max-w-[1600px] px-2 pb-4 pt-2">
                 <div className="glass flex flex-col items-center justify-between gap-2 rounded-2xl px-4 py-3 text-xs text-[var(--muted)] sm:flex-row">
-                    <p>© {year} {OWNER_CONFIG.name} · {SITE_CONFIG.brand}</p>
+                    <p>© {year} {OWNER_CONFIG.name} · {SITE_CONFIG.title}</p>
                     <p className="flex items-center gap-2">
                         <span>{SITE_CONFIG.description}</span>
                         <span className="opacity-40">/</span>
