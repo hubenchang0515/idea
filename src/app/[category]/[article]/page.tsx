@@ -179,11 +179,11 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
             <JsonLd data={jsonLd}/>
             <Card className="glass overflow-hidden rounded-2xl p-0">
                 <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border)] px-4 py-3">
-                    <nav className="flex min-w-0 items-center gap-1.5 text-xs text-[var(--muted)]">
-                        <Link href="/" className="transition-colors hover:text-emerald-600 dark:hover:text-emerald-400">首页</Link>
-                        <span className="opacity-40">/</span>
+                    <nav className="flex min-w-0 items-center gap-1.5 whitespace-nowrap text-xs text-[var(--muted)]">
+                        <Link href="/" className="shrink-0 transition-colors hover:text-emerald-600 dark:hover:text-emerald-400">首页</Link>
+                        <span className="shrink-0 opacity-40">/</span>
                         <Link href={categoryHref} className="transition-colors hover:text-emerald-600 dark:hover:text-emerald-400">{categoryName}</Link>
-                        <span className="opacity-40">/</span>
+                        <span className="shrink-0 opacity-40">/</span>
                         <span className="truncate text-[var(--foreground)] opacity-80">{title}</span>
                     </nav>
                     <div className="flex items-center gap-1 text-[var(--muted)]">
@@ -191,8 +191,8 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
                             created &&
                             <span className="mr-1 hidden text-xs sm:inline">{created}</span>
                         }
-                        <Link href="/" className="icon-btn" title="返回首页"><HomeIcon/></Link>
-                        <Link href={categoryHref} className="icon-btn" title="分类列表"><ListIcon/></Link>
+                        <Link href="/" className="icon-btn hidden sm:inline-flex" title="返回首页"><HomeIcon/></Link>
+                        <Link href={categoryHref} className="icon-btn hidden sm:inline-flex" title="分类列表"><ListIcon/></Link>
                     </div>
                 </div>
                 <div className="px-4 py-3 sm:px-6">
