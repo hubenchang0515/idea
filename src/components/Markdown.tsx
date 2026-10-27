@@ -172,9 +172,11 @@ const MakeComponents = (href:string):Components => {
 
         async table(props) {
             return (
-                <table className='my-3 max-w-full mx-auto border border-[var(--border)]'>
-                    { props.children }
-                </table>
+                <div className='table-wrap'>
+                    <table>
+                        { props.children }
+                    </table>
+                </div>
             )
         },
 
@@ -191,13 +193,13 @@ const MakeComponents = (href:string):Components => {
         },
 
         async th(props) {
-            const align = props.node?.properties.align as "center" | "right" | "left" | "justify" | "char" | undefined
-            return <td align={align} className='font-bold p-2 border border-[var(--border)]'>{ props.children }</td>
+            const align = props.node?.properties.align as "center" | "right" | undefined
+            return <th scope="col" style={{ textAlign: align === 'center' || align === 'right' ? align : 'left' }}>{ props.children }</th>
         },
 
         async td(props) {
-            const align = props.node?.properties.align as "center" | "right" | "left" | "justify" | "char" | undefined
-            return <td align={align} className='p-2 border border-[var(--border)]'>{ props.children }</td>
+            const align = props.node?.properties.align as "center" | "right" | undefined
+            return <td style={{ textAlign: align === 'center' || align === 'right' ? align : 'left' }}>{ props.children }</td>
         },
 
         async ol(props) {
