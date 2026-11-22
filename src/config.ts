@@ -68,4 +68,10 @@ export const LINKS = [
         title: "编程书籍分享",
         url: "https://pdf-shelf.pages.dev/",
     },
+
+    {
+        icon: "https://daily.xplanc.org/favicon.svg",
+        title: "每日阅读",
+        url: "https://daily.xplanc.org/",
+    },
 ]
