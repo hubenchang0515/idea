@@ -89,7 +89,6 @@ const MakeComponents = (href:string):Components => {
 
         async h2(props) { 
             const anchor = await anchorHash(props.children?.toString()??'');
-            console.log(props.children?.toString()??'', anchor)
             return (
                 <h2 id={anchor} className='text-2xl my-5 font-bold text-slate-800 dark:text-sky-300 border-s-4 border-emerald-400 ps-2'>
                     <Link 
@@ -228,7 +227,6 @@ const MakeComponents = (href:string):Components => {
             let url = href??'';
             const matches = url.match(/#?!hash\(([^)]+)\)$/);
             if (matches) {
-                console.log('a', decodeURIComponent(matches[1]), await anchorHash(decodeURIComponent(matches[1])))
                 url = url.replace(/#?!hash\(([^)]+)\)$/, '#' + await anchorHash(decodeURIComponent(matches[1])));
             }
             return <Link href={url} title={title} className='text-blue-500 dark:text-blue-400 hover:underline'>{children}</Link>
