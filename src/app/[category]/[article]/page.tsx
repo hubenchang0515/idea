@@ -7,9 +7,11 @@ import Frame from "@/components/Frame";
 import JsonLd from "@/components/JsonLd";
 import Link from "@/components/Link";
 import Markdown from "@/components/Markdown";
+import PrimerLinks from "@/components/PrimerLinks";
 import Pagination from "@/components/Pagination";
 import { OWNER_CONFIG, SITE_CONFIG } from "@/config";
 import { categories as getGategories, content, state } from "@/utils/document";
+import { primerLang } from "@/utils/primers";
 import { absoluteUrl, articlePath, categoryPath, excerpt, OG_IMAGE } from "@/utils/seo";
 
 export interface PageParams {
@@ -106,6 +108,7 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
     const canonical = absoluteUrl(articlePath(categoryName, articleName));
     const title = articleName.replace(/\.md$/, '');
     const categoryHref = categoryPath(categoryName);
+    const primerLanguage = primerLang(categoryName);
     const description = excerpt(text.replace(/^#\s+.*\r?\n/, ''), 200);
     const created = article ? new Intl.DateTimeFormat('zh-CN', {
         year: 'numeric',
@@ -201,7 +204,8 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
                     </div>
                 </div>
                 <div className="px-4 py-3 sm:px-6">
-                    <Markdown content={text} href={canonical}/>
+                    <Markdown content={text} href={canonical} lang={primerLanguage}/>
+                    <PrimerLinks content={text} lang={primerLanguage}/>
                 </div>
             </Card>
             <Pagination

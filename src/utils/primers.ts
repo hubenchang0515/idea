@@ -76,6 +76,107 @@ function parseSitemap(data: string): Record<string, SitemapNode> {
     return result;
 }
 
+// 文章分类对应的 primers 语言
+const CATEGORY_LANGS: Record<string, string> = {
+    'python': 'python',
+    'c': 'c',
+    'c++': 'c++',
+    'c 语言': 'c',
+    'lua': 'lua',
+    'html': 'html',
+    'bash': 'bash',
+    'shell': 'bash',
+    'sh': 'bash',
+    'linux 命令与配置': 'bash',
+};
+
+export function primerLang(category: string): string {
+    const key = category.trim().toLowerCase();
+    return CATEGORY_LANGS[key] ?? key;
+}
+
+export function primerHref(text: string, lang: string): string | undefined {
+    const links = getPrimerSitemap()[lang]?.links;
+    if (!links) {
+        return undefined;
+    }
+
+    const key = text.trim();
+    return Object.hasOwn(links, key) ? links[key] : undefined;
+}
+
+export function resolvePrimerHref(text: string, lang?: string): string | undefined {
+    if (lang) {
+        const href = primerHref(text, lang);
+        if (href) {
+            return href;
+        }
+    }
+
+    const key = text.trim();
+    if (!key) {
+        return undefined;
+    }
+
+    const hrefs = new Set<string>();
+    for (const node of Object.values(getPrimerSitemap())) {
+        if (Object.hasOwn(node.links, key)) {
+            hrefs.add(node.links[key]);
+        }
+    }
+
+    return hrefs.size === 1 ? hrefs.values().next().value : undefined;
+}
+
+export interface PrimerLink {
+    text: string;
+    href: string;
+}
+
+const FENCED_CODE = /^ {0,3}(`{3,}|~{3,})([^\n]*)\n([\s\S]*?)^ {0,3}\1[ \t]*$/gm;
+const INLINE_CODE = /`([^`\n]+)`/g;
+
+function collectTokens(source: string, resolve: (token: string) => string | undefined, links: Map<string, string>) {
+    for (const part of source.split(/(\s+)/)) {
+        if (!part.trim()) {
+            continue;
+        }
+
+        const href = resolve(part);
+        if (href && !links.has(href)) {
+            links.set(href, part);
+        }
+    }
+}
+
+export function collectPrimerLinks(content: string, lang?: string): PrimerLink[] {
+    const links = new Map<string, string>();
+    let last = 0;
+
+    for (const match of content.matchAll(FENCED_CODE)) {
+        const index = match.index ?? 0;
+        const inline = content.slice(last, index);
+
+        for (const code of inline.matchAll(INLINE_CODE)) {
+            collectTokens(code[1], (token) => resolvePrimerHref(token, lang), links);
+        }
+
+        const info = match[2].trim().split(/\s+/)[0] ?? '';
+        const language = /language-(\w+)/.exec(`language-${info}`)?.[1];
+        if (language) {
+            collectTokens(match[3], (token) => primerHref(token, language), links);
+        }
+
+        last = index + match[0].length;
+    }
+
+    for (const code of content.slice(last).matchAll(INLINE_CODE)) {
+        collectTokens(code[1], (token) => resolvePrimerHref(token, lang), links);
+    }
+
+    return Array.from(links, ([href, text]) => ({text, href}));
+}
+
 export function getPrimerSitemap(): Record<string, SitemapNode> {
     if (sitemap) {
         return sitemap;

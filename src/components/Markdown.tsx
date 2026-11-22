@@ -6,6 +6,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus as highlight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Link from './Link';
 import DocLink from './DocLink';
+import { resolvePrimerHref } from '@/utils/primers';
 
 export async function hash(algorithm:string, data:BufferSource) {
     const hashBuffer = await crypto.subtle.digest(algorithm, data);
@@ -24,16 +25,17 @@ export async function anchorHash(text:string) {
 export interface MarkdownProps {
     content:string;
     href:string;
+    lang?:string;
 }
 
-function CodeNode(props:{node:rendererNode, stylesheet: { [key: string]: React.CSSProperties }, context:string, rows:number}) {
+function CodeNode(props:{node:rendererNode, stylesheet: { [key: string]: React.CSSProperties }, context:string, rows:number, linked:Set<string>}) {
     if (props.node.type === 'text') {
         if (props.node.value === undefined || props.node.value === "") {                        // 空字符串
             return null
         } else if (/^\s+$/.test(props.node.value.toString())) {                                 // 空白字符串
             return <span>{props.node.value}</span>
         } else if (/^\S+$/.test(props.node.value.toString())) {                                 // 不含空白字符
-            return <DocLink text={props.node.value.toString()} lang={props.context}/>
+            return <DocLink text={props.node.value.toString()} lang={props.context} linked={props.linked}/>
         } else {
             const items = props.node.value.toString().split(/(\s+)/)
             return items.map((item, i) => <CodeNode key={i} {...props} node={{type:'text', value:item}}/>)
@@ -59,13 +61,40 @@ function CodeNode(props:{node:rendererNode, stylesheet: { [key: string]: React.C
     }
 }
 
+function InlineCode({text, lang, linked}:{text:string, lang?:string, linked:Set<string>}) {
+    if (!lang) {
+        return <>{text}</>;
+    }
+
+    const parts = text.split(/(\s+)/);
+    return (
+        <>
+            {
+                parts.map((part, index) => {
+                    if (!part.trim()) {
+                        return part;
+                    }
+
+                    const href = resolvePrimerHref(part, lang);
+                    if (!href) {
+                        return part;
+                    }
+
+                    return <DocLink key={index} text={part} lang={lang} href={href} linked={linked}/>;
+                })
+            }
+        </>
+    )
+}
+
 export default function Markdown(props: MarkdownProps) {
-    
+    const linked = new Set<string>();
+
     return (
         <article className='markdown-body'>
             <ReactMarkdown
                 remarkPlugins={[remarkGfm, remarkCjkFriendly]}
-                components={MakeComponents(props.href)}
+                components={MakeComponents(props.href, props.lang, linked)}
             >
                 {props.content}
             </ReactMarkdown>
@@ -73,7 +102,7 @@ export default function Markdown(props: MarkdownProps) {
     )
 }
 
-const MakeComponents = (href:string):Components => {
+const MakeComponents = (href:string, lang:string|undefined, linked:Set<string>):Components => {
     return {
         async h1(props) { 
             return (
@@ -253,7 +282,7 @@ const MakeComponents = (href:string):Components => {
                                 <code className={className} style={{whiteSpace:'pre'}}>
                                 {
                                     rows.map((row) => {
-                                        return row.children?.map((node, i) => <CodeNode key={i} node={node} stylesheet={stylesheet} context={match[1]} rows={rows.length.toString().length}/>)
+                                        return row.children?.map((node, i) => <CodeNode key={i} node={node} stylesheet={stylesheet} context={match[1]} rows={rows.length.toString().length} linked={linked}/>)
                                     })
                                 }
                                 </code>
@@ -276,7 +305,7 @@ const MakeComponents = (href:string):Components => {
             } else {
                 return (
                     <code className="bg-pink-50 text-pink-600 dark:bg-pink-500/15 dark:text-pink-300 px-1.5 py-0.5 rounded text-[0.9em]">
-                        {children}
+                        <InlineCode text={source} lang={lang} linked={linked}/>
                     </code>
                 )
             }

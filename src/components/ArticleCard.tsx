@@ -1,4 +1,5 @@
 import { content, type Article as ArticleProps} from '@/utils/document'
+import { primerLang } from '@/utils/primers';
 import Markdown from './Markdown';
 import Link from './Link';
 import Card from './Card';
@@ -29,6 +30,7 @@ export default async function ArticleCard(props:ArticleProps) {
                 <Markdown 
                     content={previewLines.join('\n')}
                     href={href} 
+                    lang={primerLang(props.category)}
                 />
                 {
                     codeTruncated &&
