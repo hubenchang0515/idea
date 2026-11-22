@@ -1,6 +1,7 @@
 import ReactMarkdown, { Components } from 'react-markdown'
 import Image from './Image';
 import remarkGfm from 'remark-gfm';
+import remarkCjkFriendly from 'remark-cjk-friendly/parseOnly';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus as highlight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Link from './Link';
@@ -63,7 +64,7 @@ export default function Markdown(props: MarkdownProps) {
     return (
         <article className='markdown-body'>
             <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
+                remarkPlugins={[remarkGfm, remarkCjkFriendly]}
                 components={MakeComponents(props.href)}
             >
                 {props.content}
