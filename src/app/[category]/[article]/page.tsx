@@ -7,6 +7,7 @@ import Frame from "@/components/Frame";
 import JsonLd from "@/components/JsonLd";
 import Link from "@/components/Link";
 import Markdown from "@/components/Markdown";
+import Pagination from "@/components/Pagination";
 import { OWNER_CONFIG, SITE_CONFIG } from "@/config";
 import { categories as getGategories, content, state } from "@/utils/document";
 import { absoluteUrl, articlePath, categoryPath, excerpt, OG_IMAGE } from "@/utils/seo";
@@ -97,7 +98,11 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
     const text = await content(categoryName, articleName);
     const categories = await getGategories();
     const articles = categories.flatMap(category => category.articles).sort((x, y) => y.state.createdTime.getTime() - x.state.createdTime.getTime());
-    const article = categories.find((item) => item.name === categoryName)?.articles.find((item) => item.name === articleName);
+    const sequence = categories.flatMap((category) => category.articles);
+    const index = sequence.findIndex((item) => item.category === categoryName && item.name === articleName);
+    const article = index >= 0 ? sequence[index] : undefined;
+    const prev = index > 0 ? sequence[index - 1] : undefined;
+    const next = index >= 0 && index < sequence.length - 1 ? sequence[index + 1] : undefined;
     const canonical = absoluteUrl(articlePath(categoryName, articleName));
     const title = articleName.replace(/\.md$/, '');
     const categoryHref = categoryPath(categoryName);
@@ -199,6 +204,14 @@ export default async function Page({params}:{params:Promise<PageParams>}) {
                     <Markdown content={text} href={canonical}/>
                 </div>
             </Card>
+            <Pagination
+                prev={prev ? articlePath(prev.category, prev.name) : undefined}
+                next={next ? articlePath(next.category, next.name) : undefined}
+                prevLabel={prev ? prev.name.replace(/\.md$/, '') : undefined}
+                nextLabel={next ? next.name.replace(/\.md$/, '') : undefined}
+                showCenter={false}
+                stackOnMobile
+            />
             <Discussion/>
         </Frame>
     )

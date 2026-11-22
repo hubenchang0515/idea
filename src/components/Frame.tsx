@@ -28,7 +28,7 @@ export default function Frame(props:FrameProps)
                         </span>
                     </Link>
                     <nav className="flex items-center gap-0.5 text-sm">
-                        <Link href="/" className="nav-pill">首页</Link>
+                        <Link href={SITE_CONFIG.home} className="nav-pill">首页</Link>
                         <Link href={SITE_CONFIG.repo} className="nav-pill" title="GitHub 仓库">
                             <GitHubIcon/>
                             <span className="hidden sm:inline">GitHub</span>
