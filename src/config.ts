@@ -19,6 +19,11 @@ export const OWNER_CONFIG = {
     email: 'hubenchang0515@gmail.com'
 }
 
+// 第三方统计
+export const ANALYTICS_CONFIG = {
+    googleAnalyticsId: 'G-7X0K330YFR',
+}
+
 // 文档路径
 export const DOCUMENT_CONFIG = {
     root: 'idea-document',

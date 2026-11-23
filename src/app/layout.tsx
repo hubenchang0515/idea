@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import JsonLd from "@/components/JsonLd";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { OWNER_CONFIG, SITE_CONFIG } from "@/config";
 import { absoluteUrl, OG_IMAGE, SITE_DESCRIPTION, SITE_TITLE } from "@/utils/seo";
 
@@ -106,6 +107,7 @@ export default function RootLayout({
     <html lang="zh-CN">
       <body>
         <JsonLd data={jsonLd}/>
+        <GoogleAnalytics />
         {children}
       </body>
     </html>
